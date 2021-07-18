@@ -1,0 +1,25 @@
+Level 1 --> Level 2 = The - character is special in linux because any files named that cannot be opened
+normally using cat. You must redirect input to the file to get its contents out.
+
+Level 2 --> Level 3 = Spaces in file names can be cat-ted by cat 'file name here'
+
+Level 4 --> Level 5 = You can also do ./file_name if the file begins with a -, which
+linux may confuse as a command line argument. Also, the file command is useful
+in checking type, content, etc of a file.
+
+
+Level 5 --> Level 6 = Listed all directories and files' size using the du command
+specifying bytes and the -a argument. Then I piped the output to sort -h and sorted
+the file size and catt-ed the right directory.
+
+Level 6 --> Level 7 = Used the find command to list all files belonging to -group,
+-user, and -size 133c (for bytes). Usually you get a bunch of permission denied
+errors, which you can redirect to /dev/null for bs sdouts. 
+
+Level 8 --> Level 9 = You were on the right path as to do uniq -u to spit out 
+only unique lines, but remember to sort it first, otherwise it will not do proper
+filtering.
+
+Level 9 --> Level 10 = Use the strings command if you have a need of filtering
+strings out of any data. I did that and piped the output to a grep which matched
+'^=' i.e. any string beginning with = sign.
