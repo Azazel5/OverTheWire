@@ -23,3 +23,20 @@ filtering.
 Level 9 --> Level 10 = Use the strings command if you have a need of filtering
 strings out of any data. I did that and piped the output to a grep which matched
 '^=' i.e. any string beginning with = sign.
+
+Level 11 --> Level 12 = Transforming text is done easily via the tr command which
+takes two sets of texts and can take the union or deletion of several operations.
+Using that, we can transform any alphabetical text [a-zA-Z] to [a-mn-zA-MN-Z] 
+i.e. 13 units up for each character.
+
+Level 12 --> Level 13 = There are several formats of zipping, unzipping, and
+hexdumping files. For hexdumps, the xxl command is useful to reverse or create
+them. For zip files, there are the tar, gzip, and bzip2 functionalities.
+
+Level 13 --> Level 14 = ssh can be done via the use of public keys and private
+keys. If you got a private key, you can specify it with the -i flag. Also, 
+once you're logged into a system and want to bounce to another system, the host
+will be localhost because localhost is the current system.
+
+Level 14 --> Level 15 = Remember the difference between ssh and telent. One is 
+for logging in and the other is for data transfer among other things.
