@@ -40,3 +40,56 @@ will be localhost because localhost is the current system.
 
 Level 14 --> Level 15 = Remember the difference between ssh and telent. One is 
 for logging in and the other is for data transfer among other things.
+
+Level 15 --> Level 16 = Telnet isn't the only service allowing you to pass data
+elsewhere. OpenSSL and netcat is able to do this too but the former does it at
+the SSL level and can do encryption and decryption as well. This level is solved
+by creating an s_client, connecting to our host, and sending the required data.
+
+Level 16 --> Level 17 = Use the nmap port scanner with a port list -p[1-200], and
+get open ports. Check each of these with openssl s_client if there's any certificates.
+If so, get back the RSA credentials and save it to a file. Change the permissions
+such that only the owner can access it, and use it to jump ssh to the next level.
+A chmod 600 should do the trick.
+
+Level 18 --> Level 19 = The .bashrc file was forcing a logout as soon as I logged
+in to the server, so I used a bash --norc in conjunction with ssh. Note: this
+causes a different prompt to be displayed on the screen, but it does work. Alternate
+way: you can execute other commands by appending them at the end of ssh, just like
+how you did with bash (like a cat readme).
+
+Level 20 --> Level 21 = Needed help on this one. Although I understood that I had
+to run the binary file and specify a port number ./file <port>, I didn't realize
+that I had to set up my own network daemon i.e. my own port listener. This can be
+easily done with netcat via the nc -lc <port> (c for command and l for listen mode).
+
+Level 21 --> Level 22 = Cronjobs are tasks which can be run in intervals by the 
+OS. You can specify certain scripts to be run in these intervals.
+
+Level 22 --> Level 23 = If you have trouble understading what a command in a bash
+script is doing, just run it! In this level, it was taking a string with the
+username, computing the md5sum, and taking the first field after cutting it with
+the delimitter ' '.
+
+Level 23 --> Level 24 = Start with a / for relative directories. The cat command
+has a -n argument which numbers the outputs, especially while looking at bash scripts.
+Wow, such a good level. I created my own bash script which has the owner spit out 
+/etc/bandit_pass/bandit24, but one mistake I made was that I (bold letters) didn't
+need to run it or even run the bash script. I kept running the cron job itself
+which obviously deletes my bash file and doesn't run with the correct permissions.
+I tried running my own file, but that gives me a permission denied error because
+I am bandit23 not bandit24. I forgot to look at the cron job text carefully, which
+clearly states that if a file owner is bandit23, wait for a minute before running
+the script (as bandit24), which I did, and it executed. All I put in my own script
+was outputting and redirecting /etc/bandit_pass/bandit24 to a file in my own directory
+in /tmp.
+
+Level 24 --> Level 25 = I think the main lesson to be learnt from this one is
+that you can obviously take leverage from programming languages like python to
+make things simpler. Not only can you solve things with it, you could even pipe
+complex outputs from it to feed it to other linux based functions.
+On the python side of things, the solution I discovered is genius. Using a string
+format specifier (:04d in particular, which puts digits in 4 letters. Examples -
+1 = 0001, 100 = 0100, or 8746 = 8746). The rest is easy, with a catch: the output
+won't work with telnet, but works with netcat. Why? "If you need something like
+cat but for the network, use netcat".
