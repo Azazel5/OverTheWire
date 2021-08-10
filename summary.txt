@@ -93,3 +93,18 @@ format specifier (:04d in particular, which puts digits in 4 letters. Examples -
 1 = 0001, 100 = 0100, or 8746 = 8746). The rest is easy, with a catch: the output
 won't work with telnet, but works with netcat. Why? "If you need something like
 cat but for the network, use netcat".
+
+Level 25 --> Level 26 = This level was all sorts of messed up. So
+our ssh with the keyfile closes the connection automatically because
+the bandit26 shell is not /bin/bash. The first order of business was
+finding out what it was through cat /etc/passwd. Printing it out,
+I saw that it was always outputting a file using the more command.
+Thus, I minimized the window so the more command could take effect
+and tried to localhost to bandit 26 again (no port specification needed
+this time). Now the program doesn't close but opens in a more mode.
+From more, we can open vim by the v command, which gives us access
+to bandit 26's files before it closes, so outputting /etc/bandit_pass/
+bandit26 gives us the password. However, this is not enough as using
+this is the same as before. I want to gain access to a shell from
+vim, which can be done by :set shell=/bin/bash and then :shell. 
+Ingenius.  
